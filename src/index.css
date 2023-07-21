@@ -1,4 +1,6 @@
-
+:root {
+  font-family: 'Inter', 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Verdana, sans-serif;
+}
 
 h2, .question {
   font-family: 'Karla';

@@ -4,7 +4,6 @@ import { useState } from 'react'
 function Starter(props) {
   const { startGame } = props
 
-
   return (
     <div>
       <h2>Quizzical</h2>

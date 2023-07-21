@@ -3,6 +3,7 @@ import { nanoid } from 'nanoid'
 import './App.css'
 import Starter from './Starter'
 import Questions from './Questions'
+import Footer from './Footer'
 
 function App() {
   const [count, setCount] = useState(1)
@@ -18,12 +19,10 @@ function App() {
       .then(data => {
         console.log(data.results)
         const modifiedAPIData = data.results.map(questionObj => (
-          // return new object with selected data from API response
-          // and add unique id with `nanoid()`
           {
-            question: questionObj.question,
-            answerChoices: [questionObj.correct_answer, questionObj.incorrect_answers[0], questionObj.incorrect_answers[1], questionObj.incorrect_answers[2]],
-            correctAnswer: questionObj.correct_answer,
+            question: decodeHTMLEntities(questionObj.question),
+            answerChoices: [decodeHTMLEntities(questionObj.correct_answer), decodeHTMLEntities(questionObj.incorrect_answers[0]), decodeHTMLEntities(questionObj.incorrect_answers[1]), decodeHTMLEntities(questionObj.incorrect_answers[2])],
+            correctAnswer: decodeHTMLEntities(questionObj.correct_answer),
             id: nanoid(),
             isSelected: false
 
@@ -33,6 +32,10 @@ function App() {
         setQuizData(modifiedAPIData)
       })
   }, [count]) // do I need a dependency array? Or should I have a function that calls the API? Need to re-address once I'm to the "new game" button
+
+  // need a way to handle if answer is selected
+
+  // need a way to check for correct answer
   
   function startGame() {
     console.log(quizData) // REMOVE LATER
@@ -46,13 +49,21 @@ function App() {
     return decodedString
   }
 
+  function shuffleArray(arr) {
+    for (let i = arr.length - 1; i > 0; i--) {
+      const randomNum = Math.floor(Math.random() * (i + 1));
+      [arr[i], arr[randomNum]] = [arr[randomNum], arr[i]];
+    }
+    return arr;
+  }
+
   return (
     <main>
       { gameStatus ? 
         <Questions 
           quizData={quizData} 
           isSelected={isSelected} 
-          decodeHTMLEntities={decodeHTMLEntities} 
+          shuffleArray={shuffleArray} 
         /> : 
         <Starter 
           startGame={startGame} 
