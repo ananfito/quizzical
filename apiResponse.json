@@ -1,0 +1,63 @@
+// data.results = 
+[
+  {
+    "category": "Art",
+    "type": "multiple",
+    "difficulty": "medium",
+    "question": "Which of these are the name of a famous marker brand?",
+    "correct_answer": "Copic",
+    "incorrect_answers": [
+      "Dopix",
+      "Cofix",
+      "Marx"
+    ]
+  },
+  {
+    "category": "Entertainment: Video Games",
+    "type": "multiple",
+    "difficulty": "medium",
+    "question": "Phil Fish was the designer of which game?",
+    "correct_answer": "Fez",
+    "incorrect_answers": [
+      "Super Meat Boy",
+      "Hotline Miami",
+      "FTL"
+    ]
+  },
+  {
+    "category": "Entertainment: Cartoon & Animations",
+    "type": "multiple",
+    "difficulty": "easy",
+    "question": "Which of these characters from &quot;SpongeBob SquarePants&quot; is not a squid?",
+    "correct_answer": "Gary",
+    "incorrect_answers": [
+      "Orvillie",
+      "Squidward",
+      "Squidette"
+    ]
+  },
+  {
+    "category": "Entertainment: Video Games",
+    "type": "multiple",
+    "difficulty": "medium",
+    "question": "Who created Agent 47 in the game series &quot;Hitman&quot;?",
+    "correct_answer": "Dr. Otto Wolfgang Ort-Meyer",
+    "incorrect_answers": [
+      "Professor Hertz Amadeus Schneider",
+      "Dr. Josef Mengele",
+      "Professor Otto Rothwinkler"
+    ]
+  },
+  {
+    "category": "Science & Nature",
+    "type": "multiple",
+    "difficulty": "medium",
+    "question": "Which portion of the Marijuana plant produces the psychoactive substance known as THC?",
+    "correct_answer": "Female Flower",
+    "incorrect_answers": [
+      "Leaves",
+      "Male Flower",
+      "Root Ball"
+    ]
+  }
+]
