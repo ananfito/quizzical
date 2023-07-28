@@ -3,13 +3,11 @@ import { nanoid } from 'nanoid'
 import './App.css'
 import Starter from './Starter'
 import Questions from './Questions'
-import Footer from './Footer'
 
 function App() {
-  const [count, setCount] = useState(1)
+  const [count, setCount] = useState(0)
   const [gameStatus, setGameStatus] = useState(false)
   const [quizData, setQuizData] = useState([])
-  const [isSelected, setIsSelected] = useState(false)
 
 
   // make call to API & store data in array
@@ -21,21 +19,39 @@ function App() {
         const modifiedAPIData = data.results.map(questionObj => (
           {
             question: decodeHTMLEntities(questionObj.question),
-            answerChoices: [decodeHTMLEntities(questionObj.correct_answer), decodeHTMLEntities(questionObj.incorrect_answers[0]), decodeHTMLEntities(questionObj.incorrect_answers[1]), decodeHTMLEntities(questionObj.incorrect_answers[2])],
-            correctAnswer: decodeHTMLEntities(questionObj.correct_answer),
-            id: nanoid(),
-            isSelected: false
-
+            answerChoices: [
+              {
+                answerChoice: decodeHTMLEntities(questionObj.correct_answer),
+                answerId: nanoid(),
+                isCorrect: true,
+                isSelected: false
+              },
+              {
+                answerChoice: decodeHTMLEntities(questionObj.incorrect_answers[0]),
+                answerId: nanoid(),
+                isCorrect: false,
+                isSelected: false
+              },
+              {
+                answerChoice: decodeHTMLEntities(questionObj.incorrect_answers[1]),
+                answerId: nanoid(),
+                isCorrect: false,
+                isSelected: false
+              },
+              {
+                answerChoice: decodeHTMLEntities(questionObj.incorrect_answers[2]),
+                answerId: nanoid(),
+                isCorrect: false,
+                isSelected: false
+              },
+            ],
+            questionId: nanoid()
           }
         ))
         // update state
         setQuizData(modifiedAPIData)
       })
   }, [count]) // do I need a dependency array? Or should I have a function that calls the API? Need to re-address once I'm to the "new game" button
-
-  // need a way to handle if answer is selected
-
-  // need a way to check for correct answer
   
   function startGame() {
     console.log(quizData) // REMOVE LATER
@@ -57,13 +73,25 @@ function App() {
     return arr;
   }
 
+  // need a way to handle if answer is selected
+  function selectAnswer(id) {
+    // need to map over the answerChoices array
+    // need to select the `isSelected` element and switch data type
+    // update state
+    console.log('you clicked something')
+    console.log(id)
+    // setQuizData(prevQuizData => prevQuizData.map((questionObj) => {console.log(questionObj)}))
+  }
+
+  // need a way to check for correct answer
+
   return (
     <main>
       { gameStatus ? 
         <Questions 
           quizData={quizData} 
-          isSelected={isSelected} 
           shuffleArray={shuffleArray} 
+          selectAnswer={selectAnswer}
         /> : 
         <Starter 
           startGame={startGame} 
