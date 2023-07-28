@@ -1,0 +1,30 @@
+{
+  "question": "Who was the Roman god of fire?",
+  "answerChoices": [
+    {
+      "answerChoice": "Vulcan",
+      "answerId": "GQf7CdZ7nkyGWgtsAnEtY",
+      "isCorrect": true,
+      "isSelected": false
+    },
+    {
+      "answerChoice": "Apollo",
+      "answerId": "tzfzdeLOFleKFnlsrjBOf",
+      "isCorrect": false,
+      "isSelected": false
+    },
+    {
+      "answerChoice": "Jupiter",
+      "answerId": "kuUyWHqVfa0HxW1BiCqRr",
+      "isCorrect": false,
+      "isSelected": false
+    },
+    {
+      "answerChoice": "Mercury",
+      "answerId": "PqVX_codafIZ_HqqGKgAN",
+      "isCorrect": false,
+      "isSelected": false
+    }
+  ],
+  "questionId": "NyG4D9JWPl6ZSFkMRKjQo"
+}

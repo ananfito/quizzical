@@ -81,6 +81,11 @@ function App() {
     console.log('you clicked something')
     console.log(id)
     // setQuizData(prevQuizData => prevQuizData.map((questionObj) => {console.log(questionObj)}))
+    setQuizData(prevQuizData => prevQuizData.map(questionObj => {
+      return {...questionObj, answerChoices: questionObj.answerChoices.map(answerChoiceObj => {
+        return answerChoiceObj.answerId === id ? {...answerChoiceObj, isSelected: !answerChoiceObj.isSelected} : answerChoiceObj
+      })}
+    }))
   }
 
   // need a way to check for correct answer
