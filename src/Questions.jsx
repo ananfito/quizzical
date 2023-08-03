@@ -4,7 +4,7 @@ import { nanoid, random } from 'nanoid'
 function Questions(props) {
   const { quizData, shuffleArray, selectAnswer } = props
   const styles = {
-    backgroundColor: 'none'
+    backgroundColor: ''
   }
   const selectedChoice = {
     backgroundColor: 'pink'
@@ -12,26 +12,24 @@ function Questions(props) {
   const arr = [0, 1, 2, 3]  
   const quizElements = quizData.map(questionObj => 
     {  
-      const randomizedArr = shuffleArray([...arr])
-
       const questionId = questionObj.questionId
       const questionText = questionObj.question
 
-      const answerId1 = questionObj.answerChoices[randomizedArr[0]].answerId
-      const answerChoice1 = questionObj.answerChoices[randomizedArr[0]].answerChoice
-      const answerChoice1Selected = questionObj.answerChoices[randomizedArr[0]].isSelected
+      const answerId1 = questionObj.answerChoices[0].answerId
+      const answerChoice1 = questionObj.answerChoices[0].answerChoice
+      const answerChoice1Selected = questionObj.answerChoices[0].isSelected
 
-      const answerId2 = questionObj.answerChoices[randomizedArr[1]].answerId
-      const answerChoice2 = questionObj.answerChoices[randomizedArr[1]].answerChoice
-      const answerChoice2Selected = questionObj.answerChoices[randomizedArr[1]].isSelected
+      const answerId2 = questionObj.answerChoices[1].answerId
+      const answerChoice2 = questionObj.answerChoices[1].answerChoice
+      const answerChoice2Selected = questionObj.answerChoices[1].isSelected
 
-      const answerId3 = questionObj.answerChoices[randomizedArr[2]].answerId
-      const answerChoice3 = questionObj.answerChoices[randomizedArr[2]].answerChoice
-      const answerChoice3Selected = questionObj.answerChoices[randomizedArr[2]].isSelected
-      const answerId4 = questionObj.answerChoices[randomizedArr[3]].answerId
+      const answerId3 = questionObj.answerChoices[2].answerId
+      const answerChoice3 = questionObj.answerChoices[2].answerChoice
+      const answerChoice3Selected = questionObj.answerChoices[2].isSelected
+      const answerId4 = questionObj.answerChoices[3].answerId
 
-      const answerChoice4 = questionObj.answerChoices[randomizedArr[3]].answerChoice
-      const answerChoice4Selected = questionObj.answerChoices[randomizedArr[3]].isSelected
+      const answerChoice4 = questionObj.answerChoices[3].answerChoice
+      const answerChoice4Selected = questionObj.answerChoices[3].isSelected
 
       return (
         <div 
