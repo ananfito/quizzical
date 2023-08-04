@@ -3,12 +3,14 @@ import { nanoid } from 'nanoid'
 import './App.css'
 import Starter from './Starter'
 import Questions from './Questions'
+import Question from './Question'
 
 function App() {
   const [count, setCount] = useState(0)
   const [score, setScore] = useState(0)
   const [gameStatus, setGameStatus] = useState(false)
   const [quizData, setQuizData] = useState([])
+  const [selectedAnswer, setSelectedAnswer] = useState('')
 
 
   // make call to API & store data in array
@@ -84,32 +86,11 @@ function App() {
   }
 
   // need a way to handle if answer is selected
-  function selectAnswer(id) {
-    // need to map over the answerChoices array
-    // need to select the `isSelected` element and switch data type
-    // update state
 
-    setQuizData(prevQuizData => prevQuizData.map(questionObj => {
-
-      return {...questionObj, answerChoices: questionObj.answerChoices.map(answerChoiceObj => {
-        // need to check if id matches and change isSelected
-        // but also need to check if other IDs are selected and change them to the opposite
-        // check answerChoiceObj.isSelected
-
-        // if the input id matches the answerId, then I want to change isSeleted to be true 
-        // if the input id DOES NOT match the answerId, then I want isSelected to be false
-        // if (answerChoiceObj.answerId === id) {
-        //   return {...answerChoiceObj, isSelected: !answerChoiceObj.answerChoice}
-        // } 
-        // if (answerChoiceObj.answerId === !id) {
-        //   return {...answerChoiceObj, isSelected: false}
-        // } 
-
-        // ORIGINAL
-        return answerChoiceObj.answerId === id ? {...answerChoiceObj, isSelected: !answerChoiceObj.isSelected} : answerChoiceObj
-
-      })}
-    }))
+  function handleAnswerChange(answerChoice) {
+    console.log('an answer has changed')
+    console.log(answerChoice)
+    setSelectedAnswer(answerChoice)
   }
 
   // need a way to check for correct answer
@@ -117,6 +98,16 @@ function App() {
   return (
     <main>
       { gameStatus ? 
+        <Question 
+          quizData={quizData}
+          selectedAnswer={selectedAnswer}
+          onChange={handleAnswerChange}
+        /> : 
+        <Starter 
+          startGame={startGame} 
+        />
+      }
+      {/* { gameStatus ? 
         <Questions 
           quizData={quizData} 
           shuffleArray={shuffleArray} 
@@ -125,7 +116,7 @@ function App() {
         <Starter 
           startGame={startGame} 
         />
-      }
+      } */}
     </main>
   )
 }

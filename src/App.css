@@ -11,10 +11,19 @@
   align-items: center;
 }
 
+.answer > input {
+  display: none;
+}
+
 .answer {
   border: 1px solid red;
   padding: 1em;
   cursor: pointer;
+}
+
+.selected {
+  color: green;
+  background-color: 'pink';
 }
 
 .footer {
