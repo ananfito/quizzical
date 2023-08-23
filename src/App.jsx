@@ -10,8 +10,6 @@ function App() {
   const [score, setScore] = useState(0)
   const [gameStatus, setGameStatus] = useState(false)
   const [quizData, setQuizData] = useState([])
-  const [selectedAnswer, setSelectedAnswer] = useState('')
-
 
   // make call to API & store data in array
   useEffect (() => {
@@ -85,12 +83,17 @@ function App() {
     return arr;
   }
 
-  // need a way to handle if answer is selected
-
-  function handleAnswerChange(answerChoice) {
-    console.log('an answer has changed')
-    console.log(answerChoice)
-    setSelectedAnswer(answerChoice)
+  function handleAnswerChange({ value, id }) {
+    setQuizData(prevQuizData => prevQuizData.map((questionObj) => {
+      return {...questionObj, answerChoices: questionObj.answerChoices.map((answerChoiceObj) => {
+        if (value === answerChoiceObj.answerChoice) {
+          return {...answerChoiceObj, isSelected: !answerChoiceObj.isSelected}
+        } else {
+          return {...answerChoiceObj}
+        }
+      })}
+    }))
+    console.log(quizData)
   }
 
   // need a way to check for correct answer
@@ -100,23 +103,12 @@ function App() {
       { gameStatus ? 
         <Question 
           quizData={quizData}
-          selectedAnswer={selectedAnswer}
           onChange={handleAnswerChange}
         /> : 
         <Starter 
           startGame={startGame} 
         />
       }
-      {/* { gameStatus ? 
-        <Questions 
-          quizData={quizData} 
-          shuffleArray={shuffleArray} 
-          selectAnswer={selectAnswer}
-        /> : 
-        <Starter 
-          startGame={startGame} 
-        />
-      } */}
     </main>
   )
 }

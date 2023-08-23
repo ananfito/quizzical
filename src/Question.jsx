@@ -1,6 +1,7 @@
-import React from 'react'
+import { useState } from 'react'
 
-export default function Question({ quizData, selectedAnswer, onChange }) {
+export default function Question({ quizData, onChange }) {
+  
   return (
     <div>
       {quizData.map(questionObj => (
@@ -8,23 +9,21 @@ export default function Question({ quizData, selectedAnswer, onChange }) {
           <h4 className='question'>{questionObj.question}</h4>
           <form className='answer-container'>
           {questionObj.answerChoices.map(answerObj => (
-            <label
-              key={answerObj.answerChoice.id}
-              className={ selectedAnswer === answerObj.answerChoice ? 'answer selected' : 'answer'}
+            
+              <div className="answer" key={answerObj.answerId}>
+                <input
+                  type="radio"
+                  name='answer-choice'
+                  id={answerObj.answerId}
+                  value={answerObj.answerChoice}
+                  onChange={(e) => {onChange(e.target)}}
+                />
+                <label
+                htmlFor={answerObj.answerId}                
+                >{answerObj.answerChoice}</label>
+              </div>
               
-            >
-              <input
-                type="radio"
-                id={answerObj.answerId}
-                value={answerObj.answerChoice}
-                checked={selectedAnswer === answerObj.answerChoice}
-                onChange={(e) => {
-                  onChange(e.target.value)
-                  console.log(e.target)
-                }}
-              />
-              {answerObj.answerChoice}
-            </label>
+            
           ))}
                 </form>
         </div>

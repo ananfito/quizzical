@@ -11,20 +11,22 @@
   align-items: center;
 }
 
-.answer > input {
+.answer input[type="radio"] {
   display: none;
 }
 
-.answer {
+.answer input[type="radio"] + label {
+  display: inline-block;
   border: 1px solid red;
+  border-radius: 5px;
+  margin-right: 1em;
   padding: 1em;
   cursor: pointer;
 }
 
-.selected {
-  color: green;
-  background-color: 'pink';
-}
+.answer input[type="radio"]:checked + label {
+  background-color: pink;
+} 
 
 .footer {
   margin: 2em auto;
