@@ -3,13 +3,13 @@ import { nanoid } from 'nanoid'
 import './App.css'
 import Starter from './Starter'
 import Questions from './Questions'
+import Question from './Question'
 
 function App() {
   const [count, setCount] = useState(0)
   const [score, setScore] = useState(0)
   const [gameStatus, setGameStatus] = useState(false)
   const [quizData, setQuizData] = useState([])
-
 
   // make call to API & store data in array
   useEffect (() => {
@@ -83,33 +83,17 @@ function App() {
     return arr;
   }
 
-  // need a way to handle if answer is selected
-  function selectAnswer(id) {
-    // need to map over the answerChoices array
-    // need to select the `isSelected` element and switch data type
-    // update state
-
-    setQuizData(prevQuizData => prevQuizData.map(questionObj => {
-
-      return {...questionObj, answerChoices: questionObj.answerChoices.map(answerChoiceObj => {
-        // need to check if id matches and change isSelected
-        // but also need to check if other IDs are selected and change them to the opposite
-        // check answerChoiceObj.isSelected
-
-        // if the input id matches the answerId, then I want to change isSeleted to be true 
-        // if the input id DOES NOT match the answerId, then I want isSelected to be false
-        // if (answerChoiceObj.answerId === id) {
-        //   return {...answerChoiceObj, isSelected: !answerChoiceObj.answerChoice}
-        // } 
-        // if (answerChoiceObj.answerId === !id) {
-        //   return {...answerChoiceObj, isSelected: false}
-        // } 
-
-        // ORIGINAL
-        return answerChoiceObj.answerId === id ? {...answerChoiceObj, isSelected: !answerChoiceObj.isSelected} : answerChoiceObj
-
+  function handleAnswerChange({ value, id }) {
+    setQuizData(prevQuizData => prevQuizData.map((questionObj) => {
+      return {...questionObj, answerChoices: questionObj.answerChoices.map((answerChoiceObj) => {
+        if (value === answerChoiceObj.answerChoice) {
+          return {...answerChoiceObj, isSelected: !answerChoiceObj.isSelected}
+        } else {
+          return {...answerChoiceObj}
+        }
       })}
     }))
+    console.log(quizData)
   }
 
   // need a way to check for correct answer
@@ -117,10 +101,9 @@ function App() {
   return (
     <main>
       { gameStatus ? 
-        <Questions 
-          quizData={quizData} 
-          shuffleArray={shuffleArray} 
-          selectAnswer={selectAnswer}
+        <Question 
+          quizData={quizData}
+          onChange={handleAnswerChange}
         /> : 
         <Starter 
           startGame={startGame} 
