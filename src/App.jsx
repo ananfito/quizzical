@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react'
 import { nanoid } from 'nanoid'
 import './App.css'
 import Starter from './Starter'
-import Questions from './Questions'
 import Question from './Question'
 
 function App() {
@@ -50,8 +49,6 @@ function App() {
           }
         ))
 
-        console.log("modifiedAPIData:", modifiedAPIData) // REMOVE LATER
-
         const randomizedAPIData = modifiedAPIData.map(questionObj => {
           const randomizedAnswersArr = shuffleArray( [...questionObj.answerChoices] )
           return {...questionObj, answerChoices: randomizedAnswersArr}
@@ -64,9 +61,8 @@ function App() {
   }, [count]) // do I need a dependency array? Or should I have a function that calls the API? Need to re-address once I'm to the "new game" button
   
   function startGame() {
-    console.log(quizData) // REMOVE LATER
     setGameStatus(!gameStatus)
-    // setCount(prevCount => prevCount ++)
+    
   }
 
   function decodeHTMLEntities(string) {
@@ -97,6 +93,16 @@ function App() {
   }
 
   // need a way to check for correct answer
+  function checkAnswers() {
+    console.log('checking answers ...')
+
+    // go throuh answer choices
+    // if isSelected AND isCorrect are `true` 
+    // then +1 to `score`
+    // display score
+    // display "play again" button
+
+  }
 
   return (
     <main>
@@ -104,6 +110,7 @@ function App() {
         <Question 
           quizData={quizData}
           onChange={handleAnswerChange}
+          checkAnswers={checkAnswers}
         /> : 
         <Starter 
           startGame={startGame} 

@@ -1,11 +1,9 @@
-import { useState } from 'react'
-
-export default function Question({ quizData, onChange }) {
+export default function Question({ quizData, onChange, checkAnswers }) {
   
   return (
     <div>
       {quizData.map(questionObj => (
-        <div className='question-container'>
+        <div className='question-container' key={questionObj.questionId}>
           <h4 className='question'>{questionObj.question}</h4>
           <form className='answer-container'>
           {questionObj.answerChoices.map(answerObj => (
@@ -22,13 +20,11 @@ export default function Question({ quizData, onChange }) {
                 htmlFor={answerObj.answerId}                
                 >{answerObj.answerChoice}</label>
               </div>
-              
-            
           ))}
-                </form>
+          </form>
         </div>
-
       ))}
+      <button onClick={checkAnswers}>Check answers</button>
     </div>
   )
 }
