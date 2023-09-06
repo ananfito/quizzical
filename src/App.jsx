@@ -62,7 +62,7 @@ function App() {
   
   function startGame() {
     setGameStatus(!gameStatus)
-    
+
   }
 
   function decodeHTMLEntities(string) {
@@ -80,20 +80,29 @@ function App() {
   }
 
   function handleAnswerChange({ value, id }) {
+    console.log(value, id)
+    
     setQuizData(prevQuizData => prevQuizData.map((questionObj) => {
       return {...questionObj, answerChoices: questionObj.answerChoices.map((answerChoiceObj) => {
         if (value === answerChoiceObj.answerChoice) {
+          // console.log('if statement')
           return {...answerChoiceObj, isSelected: !answerChoiceObj.isSelected}
-        } else {
-          return {...answerChoiceObj}
+        } else if (value != answerChoiceObj.answerChoice) {
+          // console.log('else if statement')
+          return {...answerChoiceObj, isSelected: false}
         }
       })}
     }))
-    console.log(quizData)
+  }
+
+  function handleBlur({value}) {
+    console.log('changing an answer choice ... ')
+    console.log(value)
   }
 
   // need a way to check for correct answer
   function checkAnswers() {
+    console.log(quizData)
     console.log('checking answers ...')
 
     // go throuh answer choices
@@ -101,7 +110,14 @@ function App() {
     // then +1 to `score`
     // display score
     // display "play again" button
-
+    quizData.forEach(questionObj => {
+      questionObj.answerChoices.forEach(answerChoiceObj => {
+        if (answerChoiceObj.isSelected === true && answerChoiceObj.isCorrect === true) {
+          console.log('correct answer found')
+          setScore(prevScore => prevScore += 1)
+        }
+      })
+    })
   }
 
   return (
@@ -110,7 +126,9 @@ function App() {
         <Question 
           quizData={quizData}
           onChange={handleAnswerChange}
+          onBlur={handleBlur}
           checkAnswers={checkAnswers}
+          score={score}
         /> : 
         <Starter 
           startGame={startGame} 

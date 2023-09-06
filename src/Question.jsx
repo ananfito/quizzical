@@ -1,4 +1,4 @@
-export default function Question({ quizData, onChange, checkAnswers }) {
+export default function Question({ quizData, onChange, onFocus, onBlur, checkAnswers, score }) {
   
   return (
     <div>
@@ -14,10 +14,14 @@ export default function Question({ quizData, onChange, checkAnswers }) {
                   name='answer-choice'
                   id={answerObj.answerId}
                   value={answerObj.answerChoice}
-                  onChange={(e) => {onChange(e.target)}}
+                  // onChange={(e) => {onChange(e.target)}}
+                  onFocus={() => console.log('onFocus')}
+                  onBlur={(e) => onBlur(e.target)}
+                  
                 />
                 <label
-                htmlFor={answerObj.answerId}                
+                htmlFor={answerObj.answerId}
+                              
                 >{answerObj.answerChoice}</label>
               </div>
           ))}
@@ -25,6 +29,7 @@ export default function Question({ quizData, onChange, checkAnswers }) {
         </div>
       ))}
       <button onClick={checkAnswers}>Check answers</button>
+      <p>{score}/5</p>
     </div>
   )
 }
